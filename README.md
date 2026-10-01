@@ -1,5 +1,6 @@
 # AquaFair — Smart Equal Water Distribution & Monitoring System
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fswapnilmali1609-sy%2FAqua_Fair)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-swapnilmali1609--sy%2FAqua__Fair-blue?logo=github)](https://github.com/swapnilmali1609-sy/Aqua_Fair)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Frontend: React + Vite](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Vite-cyan.svg)](https://vitejs.dev/)
@@ -100,6 +101,25 @@ npm run dev
 ```
 
 Open **`http://localhost:5173/`** in your browser.
+
+---
+
+## 🚀 Live Cloud Deployment on Vercel
+
+AquaFair is configured for zero-configuration continuous deployment on Vercel.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fswapnilmali1609-sy%2FAqua_Fair)
+
+### Instant 1-Click Deployment
+1. Click the **Deploy with Vercel** button above or navigate to [vercel.com/new](https://vercel.com/new).
+2. Connect your GitHub account and import **`swapnilmali1609-sy/Aqua_Fair`**.
+3. Vercel automatically detects the preconfigured `vercel.json`:
+   - **Framework Preset**: Vite
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `smart_equal_water_distribution/dist`
+4. Click **Deploy**. The app will build and go live at `https://aqua-fair.vercel.app` (or your assigned Vercel URL) in under 60 seconds!
+
+> **Note on Standalone Mode**: On Vercel, all interactive dashboards (SCADA valve triggers, tanker fleet tracking, citizen meters, grievance dispatches, and emergency shutdowns) run seamlessly with intelligent client-side simulation. If you also deploy the Django REST backend (e.g. on Render, Fly.io, or AWS), simply add the environment variable `VITE_API_BASE=https://your-backend.com/api` in your Vercel Project Settings!
 
 ---
 
