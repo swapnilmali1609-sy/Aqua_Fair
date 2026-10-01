@@ -1,0 +1,12 @@
+ward_number,household_id,owner_name,address_or_lane,phone,members_count,daily_quota_liters,meter_status
+1,NP-W1-1001,Ramesh Patil,House #1, Shivaji Main Road,9822011001,4,540,Active
+1,NP-W1-1002,Sunita Deshmukh,House #2, Shivaji Chowk Lane 1,9822011002,5,675,Active
+1,NP-W1-1003,Ganesh Jadhav,House #3, Near Maruti Mandir,9822011003,3,405,Active
+2,NP-W2-2001,Prakash Shinde,House #1, Gandhi Chowk Road,9822022001,4,540,Active
+2,NP-W2-2002,Meena Kadam,House #2, Mandi Bazar Lane,9822022002,6,810,Active
+3,NP-W3-3001,Deepak Bhosale,House #1, Upper Ridge Road,9822033001,4,540,Active
+3,NP-W3-3002,Kavita Pawar,House #2, High-Tank Slope Path,9822033002,4,540,Active
+4,NP-W4-4001,Sachin Chavan,House #1, Ambedkar Chowk Main,9822044001,5,675,Active
+4,NP-W4-4002,Sneha Gaikwad,House #2, Samata Nagar Lane 1,9822044002,4,540,Active
+5,NP-W5-5001,Amol More,House #1, Shahu Colony Main,9822055001,4,540,Active
+5,NP-W5-5002,Priyanka Kulkarni,House #2, Shahu Maharaj Lane 2,9822055002,3,405,Active

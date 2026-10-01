@@ -1,0 +1,6 @@
+ward_number,ward_name,sector_type,elevation_tier,supply_timing,households_count,target_liters
+1,Ward 1 - Shivaji Nagar,Residential Lowland,Lowland,06:00 AM - 08:30 AM,250,125000
+2,Ward 2 - Gandhi Chowk,Market & Residential,Standard,06:00 AM - 08:30 AM,280,140000
+3,Ward 3 - Subhash Tekdi,Elevated Ridge Mohalla,High-Altitude,06:00 AM - 08:30 AM,220,110000
+4,Ward 4 - Dr. Ambedkar Nagar,Tail-End Colony,Tail-End,06:00 AM - 08:30 AM,260,130000
+5,Ward 5 - Shahu Maharaj Colony,Standard Residential Colony,Standard,06:00 AM - 08:30 AM,200,100000

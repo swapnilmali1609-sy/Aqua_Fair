@@ -1,0 +1,22 @@
+{
+  "name": "aquafair-smart-water-monitoring-and-equity-system",
+  "version": "1.0.0",
+  "description": "AquaFair - Smart Water Monitoring and Equity System for Nagar Parishad and Households",
+  "scripts": {
+    "dev": "npm --prefix smart_equal_water_distribution run dev",
+    "build": "npm --prefix smart_equal_water_distribution run build",
+    "frontend": "npm --prefix smart_equal_water_distribution run dev",
+    "backend": "start_aquafair.bat",
+    "test": "cd smart_equal_water_distribution/backend && python manage.py test",
+    "seed": "cd smart_equal_water_distribution/backend && python manage.py seed_data"
+  },
+  "keywords": [
+    "aquafair",
+    "smart-water-monitoring",
+    "iot",
+    "nagarparishad",
+    "water-equity"
+  ],
+  "author": "AquaFair Team",
+  "license": "MIT"
+}
