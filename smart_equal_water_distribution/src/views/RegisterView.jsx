@@ -93,20 +93,20 @@ export default function RegisterView({ initialRole = null }) {
     confirm: '',
 
     // Municipal Officer specific
-    officer_id: 'NP-OFF-104',
+    officer_id: `NP-OFF-${Math.floor(100 + Math.random() * 900)}`,
     designation: 'Executive Engineer (Water Works & Headworks)',
     officer_passcode: 'AQUA-NP-2026',
     officer_jurisdiction: 'Central Headworks ESR & All Wards',
 
     // Dispatch Member specific
     dispatch_role: 'Field Supervisor / Inspector',
-    badge_id: 'NP-SUPV-08',
+    badge_id: `NP-SUPV-${Math.floor(10 + Math.random() * 90)}`,
     emergency_contact: '9822001122',
     ward_assignment: 'All Wards (Rapid Dispatch Unit)',
     depot_location: 'Central Municipal Maintenance Depot',
 
     // Tanker Driver specific
-    license_number: 'MH14-2023-009112',
+    license_number: `MH14-${new Date().getFullYear() - 3}-${Math.floor(10000 + Math.random() * 90000)}`,
     experience_years: 6,
     vehicle_no: 'MH-12-AQ-204',
     driver_depot: 'Central Headworks ESR Pumping Station',
@@ -115,7 +115,7 @@ export default function RegisterView({ initialRole = null }) {
     ward: '1',
     address: 'House #42, Lane 2, Shivaji Chowk',
     members_count: 4,
-    household_id: 'AF-W1-1042'
+    household_id: `AF-W1-${Math.floor(1000 + Math.random() * 9000)}`
   });
 
   // Fetch available zones and tankers on mount
@@ -259,10 +259,10 @@ export default function RegisterView({ initialRole = null }) {
     setLoading(false);
 
     if (res.success) {
-      setSuccessMsg(`Registration Successful! Welcome to AquaFair as ${activeRole}. Redirecting to your console...`);
+      setSuccessMsg(`Registration Successful! Official credentials saved for ${res.user?.name || form.name}. Logging in to ${activeRole} console...`);
       setTimeout(() => {
-        navigate('/dashboard');
-      }, 1200);
+        navigate('/dashboard', { replace: true });
+      }, 800);
     } else {
       setError(res.error || 'Failed to register account. Please check all details and try again.');
     }

@@ -45,9 +45,12 @@ function AuthShell({ children, title, subtitle }) {
 
 function Login() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('samru');
-  const [password, setPassword] = useState('samru123');
+  const location = useLocation();
+  const registeredName = location.state?.registeredUsername || '';
+  const [username, setUsername] = useState(registeredName || 'samru');
+  const [password, setPassword] = useState(registeredName ? '' : 'samru123');
   const [error, setError] = useState('');
+  const [successInfo, setSuccessInfo] = useState(location.state?.message || '');
   const [loading, setLoading] = useState(false);
 
   async function submit(e) {
@@ -57,7 +60,7 @@ function Login() {
     const res = await api.login({ username, password });
     setLoading(false);
     if (res.success) {
-      navigate('/dashboard');
+      navigate('/dashboard', { replace: true });
     } else {
       setError(res.error || 'Invalid credentials. Please verify your username and password.');
     }
@@ -86,15 +89,20 @@ function Login() {
   return (
     <AuthShell title="Portal Sign In" subtitle="Sign in to access your operations console or resident smart meter.">
       <form className="form" onSubmit={submit}>
+        {successInfo && (
+          <div style={{ background: '#ecfdf5', border: '1px solid #a7f3d0', color: '#065f46', padding: '10px 12px', borderRadius: '8px', fontSize: '13px', marginBottom: '14px' }}>
+            {successInfo}
+          </div>
+        )}
         {error && <div className="error-box">{error}</div>}
         <label>
-          <span>Username or Full Name</span>
+          <span>Username, Full Name, or Household ID</span>
           <input
             type="text"
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="e.g. samru or Ramesh Patil"
+            placeholder="e.g. samru, Ramesh Patil, or AF-W1-1042"
           />
         </label>
         <label>
@@ -158,13 +166,21 @@ function Login() {
 
 function MainAppShell() {
   const navigate = useNavigate();
-  const curUser = api.getCurrentUser();
-  const isCitizen = curUser?.role === 'Citizen / Household';
-  const isDriver = curUser?.role === 'Tanker Driver';
-  const isTeamLeader = curUser?.role === 'Dispatch Team Leader';
+  const location = useLocation();
+  const [user, setUser] = useState(() => api.getCurrentUser());
 
-  const defaultTab = isCitizen ? 'citizen' : isDriver ? 'driver' : isTeamLeader ? 'teamleader' : 'dashboard';
-  const [activeTab, setActiveTab] = useState(defaultTab);
+  const isCitizen = user?.role === 'Citizen / Household';
+  const isDriver = user?.role === 'Tanker Driver';
+  const isTeamLeader = user?.role === 'Dispatch Team Leader';
+
+  const computeRoleDefaultTab = (u) => {
+    if (u?.role === 'Citizen / Household') return 'citizen';
+    if (u?.role === 'Tanker Driver') return 'driver';
+    if (u?.role === 'Dispatch Team Leader') return 'teamleader';
+    return 'dashboard';
+  };
+
+  const [activeTab, setActiveTab] = useState(() => computeRoleDefaultTab(user));
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [simSpeed, setSimSpeed] = useState(1000);
   const [toast, setToast] = useState('');
@@ -192,20 +208,32 @@ function MainAppShell() {
   const [summary, setSummary] = useState({});
   const [hourlyData, setHourlyData] = useState([]);
   const [demands, setDemands] = useState([]);
-  const [user, setUser] = useState(curUser);
+
+  // Reactive listener for auth and session changes
+  useEffect(() => {
+    const syncAuth = (e) => {
+      const cur = e?.detail || api.getCurrentUser();
+      setUser(cur);
+      if (cur?.role === 'Citizen / Household') {
+        setActiveTab('citizen');
+      } else if (cur?.role === 'Tanker Driver') {
+        setActiveTab('driver');
+      } else if (cur?.role === 'Dispatch Team Leader') {
+        setActiveTab('teamleader');
+      }
+    };
+
+    syncAuth();
+    window.addEventListener('aquafair_auth_change', syncAuth);
+    window.addEventListener('storage', syncAuth);
+    return () => {
+      window.removeEventListener('aquafair_auth_change', syncAuth);
+      window.removeEventListener('storage', syncAuth);
+    };
+  }, [location.key]);
 
   // Load initial data
   useEffect(() => {
-    const cur = api.getCurrentUser();
-    setUser(cur);
-    if (cur?.role === 'Citizen / Household') {
-      setActiveTab('citizen');
-    } else if (cur?.role === 'Tanker Driver') {
-      setActiveTab('driver');
-    } else if (cur?.role === 'Dispatch Team Leader') {
-      setActiveTab('teamleader');
-    }
-
     api.getDashboard().then((data) => {
       if (data) {
         setSystem(data.system || {});

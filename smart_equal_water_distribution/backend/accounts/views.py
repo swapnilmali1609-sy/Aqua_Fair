@@ -242,11 +242,15 @@ def api_register(request):
         household_name=name or f"{last_name or first_name} Residence",
         assigned_zone=zone
     )
-
+    user.refresh_from_db()
     serializer = UserSerializer(user)
+    user_dict = serializer.data
+    user_dict['role'] = role
+    token_str = f"session_token_{user.id}_{user.username}"
     return Response({
         'message': 'Registration successful',
-        'user': serializer.data,
+        'user': user_dict,
+        'token': token_str,
         'household_id': household_id
     }, status=status.HTTP_201_CREATED)
 
