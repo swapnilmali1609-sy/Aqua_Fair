@@ -1,0 +1,10 @@
+{
+  "name": "aquafair-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "AquaFair Django REST Backend Server",
+  "scripts": {
+    "dev": "node start-server.js",
+    "start": "node start-server.js"
+  }
+}

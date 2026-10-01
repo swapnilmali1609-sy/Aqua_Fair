@@ -1,0 +1,11 @@
+{
+  "name": "aquafair-client",
+  "version": "1.0.0",
+  "description": "AquaFair React + Vite Frontend Client",
+  "scripts": {
+    "dev": "npm --prefix ../smart_equal_water_distribution run dev",
+    "start": "npm --prefix ../smart_equal_water_distribution run dev",
+    "build": "npm --prefix ../smart_equal_water_distribution run build",
+    "preview": "npm --prefix ../smart_equal_water_distribution run preview"
+  }
+}

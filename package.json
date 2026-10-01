@@ -6,8 +6,10 @@
     "dev": "npm --prefix smart_equal_water_distribution run dev",
     "postinstall": "npm --prefix smart_equal_water_distribution install",
     "build": "npm --prefix smart_equal_water_distribution run build",
+    "client": "npm --prefix smart_equal_water_distribution run dev",
+    "server": "node server/start-server.js",
+    "backend": "node server/start-server.js",
     "frontend": "npm --prefix smart_equal_water_distribution run dev",
-    "backend": "start_aquafair.bat",
     "test": "cd smart_equal_water_distribution/backend && python manage.py test",
     "seed": "cd smart_equal_water_distribution/backend && python manage.py seed_data"
   },

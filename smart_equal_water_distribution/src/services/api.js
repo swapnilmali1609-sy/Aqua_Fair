@@ -1667,7 +1667,8 @@ export const api = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      if (res.ok) {
+      const cType = res.headers.get('content-type') || '';
+      if (res.ok && cType.includes('application/json')) {
         const data = await res.json();
         const user = {
           id: data.user.id,
@@ -1692,9 +1693,9 @@ export const api = {
         try { window.dispatchEvent(new CustomEvent('aquafair_auth_change', { detail: user })); } catch (e) {}
         try { window.dispatchEvent(new CustomEvent('aquafair_state_change')); } catch (e) {}
         return { success: true, user };
-      } else if (res.status < 500) {
+      } else if ((res.status === 401 || res.status === 400) && cType.includes('application/json')) {
         const err = await res.json().catch(() => ({}));
-        return { success: false, error: err.error || 'Invalid credentials' };
+        if (err.error) return { success: false, error: err.error };
       }
     } catch {}
 
@@ -1820,7 +1821,8 @@ export const api = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      if (res.ok) {
+      const cType = res.headers.get('content-type') || '';
+      if (res.ok && cType.includes('application/json')) {
         const out = await res.json();
         assignedHouseholdId = out.household_id || out.user?.household_id || out.user?.profile?.household_id || data.household_id || `AF-W${data.ward || 1}-${Math.floor(1000 + Math.random() * 9000)}`;
         savedUser = {
@@ -1841,10 +1843,10 @@ export const api = {
           designation: data.designation || '',
           token: out.token || `session_token_${Date.now()}`
         };
-      } else {
+      } else if (res.status === 400 && cType.includes('application/json')) {
         const err = await res.json().catch(() => ({}));
-        if (res.status < 500) {
-          return { success: false, error: err.error || 'Failed to register account' };
+        if (err.error) {
+          return { success: false, error: err.error };
         }
       }
     } catch {}
