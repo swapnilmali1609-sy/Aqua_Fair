@@ -4,6 +4,7 @@
   "description": "AquaFair - Smart Water Monitoring and Equity System for Nagar Parishad and Households",
   "scripts": {
     "dev": "npm --prefix smart_equal_water_distribution run dev",
+    "postinstall": "npm --prefix smart_equal_water_distribution install",
     "build": "npm --prefix smart_equal_water_distribution run build",
     "frontend": "npm --prefix smart_equal_water_distribution run dev",
     "backend": "start_aquafair.bat",

@@ -1,6 +1,5 @@
 // AquaFair API Service - Smart Water Monitoring and Equity System
-
-const API_BASE = '/api';
+const API_BASE = (import.meta.env?.VITE_API_BASE || import.meta.env?.VITE_API_URL || '/api').replace(/\/+$/, '');
 
 // Initial fallback mock state (mirrors AquaFair Django models)
 let localState = {
