@@ -39,9 +39,8 @@ const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
 
 // Server Endpoint:
 // Set to your computer's local Wi-Fi IPv4 address (run 'ipconfig' in cmd)
-// Example: "http://192.168.1.105:8000/api/hardware/telemetry/"
-// If using deployed cloud backend, replace with: "https://your-domain.com/api/hardware/telemetry/"
-const char* SERVER_URL = "http://192.168.1.100:8000/api/hardware/telemetry/";
+// Connected PC IP on current Wi-Fi network: 10.186.151.244
+const char* SERVER_URL = "http://10.186.151.244:8000/api/hardware/telemetry/";
 
 // Device Identification & Ward Sector Assignment
 const char* DEVICE_ID = "ESP32-AQUABALANCE-NODE-01";

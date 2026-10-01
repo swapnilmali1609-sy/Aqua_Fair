@@ -37,9 +37,10 @@ console.log('============================================================');
 console.log(`📂 Backend Directory : ${backendDir}`);
 console.log(`🐍 Python Executable  : ${pythonExe}`);
 console.log('🌐 Server Endpoint   : http://127.0.0.1:8000/api/dashboard/');
+console.log('📡 Network Access    : http://10.186.151.244:8000/api/dashboard/ (for ESP32 & Mobile)');
 console.log('============================================================\n');
 
-const child = spawn(pythonExe, ['manage.py', 'runserver', '127.0.0.1:8000'], {
+const child = spawn(pythonExe, ['manage.py', 'runserver', '0.0.0.0:8000'], {
   cwd: backendDir,
   stdio: 'inherit',
   shell: true
